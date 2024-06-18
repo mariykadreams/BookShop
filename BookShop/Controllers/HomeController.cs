@@ -1,10 +1,11 @@
 using BookShop.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging; // Add this for ILogger
 using System.Diagnostics;
 
 namespace BookShop.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Microsoft.AspNetCore.Mvc.Controller // Specify the correct Controller
     {
         private readonly ILogger<HomeController> _logger;
 
