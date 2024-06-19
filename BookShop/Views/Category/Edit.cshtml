@@ -3,13 +3,13 @@
 <form method="post">
     <div class="border p-3 mt-4">
         <div class="row pd-2">
-            <h2> Create Category</h2>
-            <hr/>
+            <h2>Edit Category</h2>
+            <hr />
         </div>
         <div asp-validation-summary="All"></div>
         <div class="mb-3 row">
             <label asp-for="Name" class="p-1"> </label>
-            <input asp-for="Name" class="form-control"/>
+            <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3 row">
@@ -18,24 +18,24 @@
             <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
 
-       <div class="row">
-           <div class="col-6 col-mb-3">
-                <button type="submit" class="btn btn-primary form-control">Create</button>
-           </div>
+        <div class="row">
+            <div class="col-6 col-mb-3">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
             <div class="col-6 col-mb-3">
                 <a asp-controller="Category" asp-action="Index" class="btn btn-secondary form-control">
                     Back to List
-                </a>    
+                </a>
             </div>
-       </div>
+        </div>
 
 
     </div>
 
 </form>
 
-@section Scripts{
+@section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial"/>
+        <partial name="_ValidationScriptsPartial" />
     }
 }
