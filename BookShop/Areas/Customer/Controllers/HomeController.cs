@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging; // Add this for ILogger
 using System.Diagnostics;
 
-namespace BookShop.Controllers
+namespace BookShop.Areas.Customer.Controllers
 {
-    public class HomeController : Microsoft.AspNetCore.Mvc.Controller // Specify the correct Controller
+    [Area("Customer")]
+    public class HomeController : Controller // Specify the correct Controller
     {
         private readonly ILogger<HomeController> _logger;
 
