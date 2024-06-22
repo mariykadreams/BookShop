@@ -25,7 +25,7 @@ namespace BookShop.Areas.Admin.Controllers
         }
 
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
 
             ProductVM productVM = new()
@@ -38,12 +38,21 @@ namespace BookShop.Areas.Admin.Controllers
                }),
                 Product = new Product()
             };
+            if(id == null || id == 0)
+            {
+                return View(productVM);
+            }
+            else
+            {
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View(productVM);
+            }
 
-            return View(productVM);
+            
         }
 
         [HttpPost]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -53,8 +62,6 @@ namespace BookShop.Areas.Admin.Controllers
             }
             else
             {
-
-
                 productVM.CategoryList = _unitOfWork.Category
                 .GetAll().Select(u => new SelectListItem
                 {
@@ -62,35 +69,7 @@ namespace BookShop.Areas.Admin.Controllers
                     Value = u.Id.ToString()
                 });
                 return View(productVM);
-            }
-            
-        }
-
-
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Product? productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(productFromDb);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            return View();
+            }   
         }
 
 
