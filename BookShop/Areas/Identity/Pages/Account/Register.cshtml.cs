@@ -149,7 +149,20 @@ namespace BookShop.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if()
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User created a new account with passsword");
+ 
+                        if(!String.IsNullOrEmpty(Input.Role))
+                        {
+                            await _userManager.AddToRoleAsync(user, Input.Role);
+                        }
+                        else
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.Role_Customer);
+                        }
+
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
